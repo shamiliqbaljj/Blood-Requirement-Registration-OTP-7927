@@ -45,9 +45,12 @@ define(['N/record','N/ui/serverWidget', 'N/format'],
          * @since 2015.2
          */
         const onRequest = (scriptContext) => {
+        
 
             if (scriptContext.request.method === 'GET')
             {
+                try{
+                    
             
             let form = serverWidget.createForm({
                 title: 'Blood Donation Requirement',
@@ -102,8 +105,15 @@ define(['N/record','N/ui/serverWidget', 'N/format'],
 
             scriptContext.response.writePage(form);
         }
+        catch(error)
+        {
+            log.error(error)
+        }
+        
+        }
         else if (scriptContext.request.method === 'POST')
         {
+            try{
             
             var firstName = scriptContext.request.parameters.custpage_firstname;
             var lastName = scriptContext.request.parameters.custpage_lastname;
@@ -123,7 +133,13 @@ define(['N/record','N/ui/serverWidget', 'N/format'],
             
 
         }
+    
+    catch(error)
+    {
+        log.error(error);
+    }
         }
+    }
 
         return {onRequest}
 
@@ -148,6 +164,8 @@ define(['N/record','N/ui/serverWidget', 'N/format'],
 
         function createRecord (firstName,lastName,genderType,phoneNumber,bloodGroup,formatDate, scriptContext)
         {
+            try
+            {
             var bloodReqirementRegistration = record.create({
                 type: 'customrecord5',
                 isDynamic: true
@@ -183,6 +201,11 @@ define(['N/record','N/ui/serverWidget', 'N/format'],
                             </body>
                             </html>`;
                 scriptContext.response.write(html);
+            }
+            catch(error)
+            {
+                log.error(error)
+            }
 
         }
 
