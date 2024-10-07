@@ -118,6 +118,7 @@ define(['N/record', 'N/ui/serverWidget', 'N/format'],
                     value: lastDonation,
                     type: format.Type.DATE
                 });
+                
 
                 createRecord(firstName, lastName, genderType, phoneNumber, bloodGroup, formatDate, scriptContext);
             }
